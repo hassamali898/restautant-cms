@@ -4,7 +4,7 @@ document.getElementById('menuForm').addEventListener('submit', async (e) => {
     const name = document.getElementById('name').value;
     const description = document.getElementById('description').value;
     const price = parseFloat(document.getElementById('price').value);
-    // const imageFile = document.getElementById('image').files[0];
+    const imageFile = document.getElementById('image').files[0];
   
     if (!name) {
       alert("Name and image are required!");
@@ -13,7 +13,7 @@ document.getElementById('menuForm').addEventListener('submit', async (e) => {
   
     const reader = new FileReader();
     reader.onloadend = async () => {
-    //   const base64Image = reader.result.split(',')[1];
+      const base64Image = reader.result.split(',')[1];
   
       const res = await fetch('/.netlify/functions/updateMenuWithImage', {
         method: 'POST',
@@ -22,8 +22,8 @@ document.getElementById('menuForm').addEventListener('submit', async (e) => {
           name,
           description,
           price,
-        //   imageName: imageFile.name,
-        //   imageContent: base64Image
+          imageName: imageFile.name,
+          imageContent: base64Image
         })
       });
   
@@ -31,6 +31,6 @@ document.getElementById('menuForm').addEventListener('submit', async (e) => {
       document.getElementById('status').innerText = data.message;
     };
   
-    // reader.readAsDataURL(imageFile);
+    reader.readAsDataURL(imageFile);
   });
   

@@ -1,14 +1,12 @@
-// const fetch = require("node-fetch");
-
 exports.handler = async (event) => {
   const token = process.env.GITHUB_TOKEN;
-  const repo = "hassamali898/restautant-cms";
+  const repo = "your-username/your-repo-name";
   const branch = "main";
   const menuPath = "public-site/menu.json";
-//   const imageFolder = "public-site/images/";
+  const imageFolder = "public-site/images/";
 
   try {
-    const { name, description, price } = JSON.parse(event.body);
+    const { name, description, price, imageName, imageContent } = JSON.parse(event.body);
 
     const headers = {
       Authorization: `token ${token}`,
@@ -22,18 +20,19 @@ exports.handler = async (event) => {
     const menuSHA = menuData.sha;
     const currentMenu = JSON.parse(Buffer.from(menuData.content, 'base64').toString());
 
-    // Add new menu item
+    // Add new item
     const newItem = {
       id: Date.now(),
       name,
       description,
       price,
-    //   image: `images/${imageName}`
+      image: `images/${imageName}`
     };
     currentMenu.push(newItem);
 
-    // Commit updated menu.json
     const updatedMenuBase64 = Buffer.from(JSON.stringify(currentMenu, null, 2)).toString('base64');
+
+    // Update menu.json
     await fetch(`https://api.github.com/repos/${repo}/contents/${menuPath}`, {
       method: "PUT",
       headers,
@@ -45,20 +44,20 @@ exports.handler = async (event) => {
       })
     });
 
-    // Upload image to /images
-    // const imageRes = await fetch(`https://api.github.com/repos/${repo}/contents/${imageFolder}${imageName}?ref=${branch}`, { headers });
-    // const imageSHA = imageRes.status === 200 ? (await imageRes.json()).sha : null;
+    // Upload image
+    const imageRes = await fetch(`https://api.github.com/repos/${repo}/contents/${imageFolder}${imageName}?ref=${branch}`, { headers });
+    const imageSHA = imageRes.status === 200 ? (await imageRes.json()).sha : null;
 
-    // await fetch(`https://api.github.com/repos/${repo}/contents/${imageFolder}${imageName}`, {
-    //   method: "PUT",
-    //   headers,
-    //   body: JSON.stringify({
-    //     message: "Add menu image from admin panel",
-    //     content: imageContent,
-    //     ...(imageSHA ? { sha: imageSHA } : {}),
-    //     branch
-    //   })
-    // });
+    await fetch(`https://api.github.com/repos/${repo}/contents/${imageFolder}${imageName}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({
+        message: "Add menu image from admin panel",
+        content: imageContent,
+        ...(imageSHA ? { sha: imageSHA } : {}),
+        branch
+      })
+    });
 
     return {
       statusCode: 200,
