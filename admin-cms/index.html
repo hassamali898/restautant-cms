@@ -1,20 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Restaurant Admin CMS</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin CMS - Add Menu Item</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+      max-width: 500px;
+      margin: auto;
+    }
+    h1 { text-align: center; }
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background: #007acc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Admin Panel - Update Menu</h1>
-
+  <h1>Add Menu Item</h1>
   <form id="menuForm">
-    <input type="text" id="name" placeholder="Item name" required><br>
-    <textarea id="description" placeholder="Description"></textarea><br>
-    <input type="number" id="price" placeholder="Price" step="0.01"><br>
-    <input type="file" id="image" accept="image/*"><br>
-    <button type="submit">Add Item</button>
+    <input type="text" id="name" placeholder="Item name" required />
+    <textarea id="description" placeholder="Item description" rows="4" required></textarea>
+    <input type="number" id="price" placeholder="Item price" required />
+    <button type="submit">Submit</button>
+    <div id="status"></div>
   </form>
-
-  <p id="status"></p>
 
   <script src="cms.js"></script>
 </body>
