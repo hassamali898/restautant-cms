@@ -1,6 +1,6 @@
 exports.handler = async (event) => {
   const token = process.env.GITHUB_TOKEN;
-  const repo = "hassamali898/restautant-cms/"; // 🔁 Replace with your actual GitHub repo
+  const repo = "hassamali898/restautant-cms"; // 🔁 Replace with your actual GitHub repo
   const branch = "main";
   const menuPath = "public-site/menu.json";
 
