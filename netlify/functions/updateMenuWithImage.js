@@ -1,6 +1,6 @@
 exports.handler = async (event) => {
   const token = process.env.GITHUB_TOKEN;
-  const repo = "your-username/your-repo-name";
+  const repo = "hassamali898/restautant-cms";
   const branch = "main";
   const menuPath = "public-site/menu.json";
   const imageFolder = "public-site/images/";
