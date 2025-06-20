@@ -1,0 +1,5 @@
+[build]
+  publish = "admin-cms"
+
+[functions]
+  directory = "netlify/functions"
