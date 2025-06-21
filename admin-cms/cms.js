@@ -4,6 +4,7 @@ document.getElementById("menuForm").addEventListener("submit", async (e) => {
   const name = document.getElementById("name").value.trim();
   const description = document.getElementById("description").value.trim();
   const price = document.getElementById("price").value.trim();
+  const imageURL = document.getElementById("imageURL").value.trim();
 
   if (!name || !description || !price) {
     document.getElementById("status").innerText = "Please fill in all fields.";
@@ -16,7 +17,7 @@ document.getElementById("menuForm").addEventListener("submit", async (e) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name, description, price })
+      body: JSON.stringify({ name, description, price, imageURL })
     });
 
     const text = await res.text();

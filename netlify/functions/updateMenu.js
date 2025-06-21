@@ -1,15 +1,15 @@
 exports.handler = async (event) => {
   const token = process.env.GITHUB_TOKEN;
-  const repo = "hassamali898/restautant-cms"; // 🔁 Replace with your actual GitHub repo
+  const repo = "hassamali898/thegoodjointdc-restaurant"; // 🔁 Replace with your actual GitHub repo
   const branch = "main";
-  const menuPath = "public-site/menu.json";
+  const menuPath = "public/menu.json";
 
   try {
     // Step 1: Parse request body
-    const { name, description, price } = JSON.parse(event.body);
+    const { name, description, price, imageURL } = JSON.parse(event.body);
 
     // Step 2: Validate input
-    if (!name || !description || !price) {
+    if (!name || !description || !price || !imageURL) {
       return {
         statusCode: 400,
         body: JSON.stringify({ message: "Missing name, description, or price" }),
@@ -43,7 +43,8 @@ exports.handler = async (event) => {
       id: Date.now(),
       name,
       description,
-      price
+      price,
+      imageURL: imageURL
     };
     menu.push(newItem);
 
