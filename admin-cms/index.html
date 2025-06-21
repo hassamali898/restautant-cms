@@ -38,7 +38,7 @@
   <form id="menuForm">
     <input type="text" id="name" placeholder="Item name" required />
     <textarea id="description" placeholder="Item description" rows="4" required></textarea>
-    <input type="number" id="price" placeholder="Item price" required />
+    <input type="number" id="price" min="0" max="1000" step="0.01" placeholder="Item price" required />
     <input type="url" id="imageURL" placeholder="Image URL" required />
     <button type="submit">Submit</button>
     <div id="status"></div>

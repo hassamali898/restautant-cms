@@ -37,6 +37,7 @@ exports.handler = async (event) => {
     }
 
     const menu = JSON.parse(Buffer.from(data.content, 'base64').toString());
+    price = parseFloat(price);
 
     // Step 5: Add new item
     const newItem = {
@@ -44,7 +45,7 @@ exports.handler = async (event) => {
       name,
       description,
       price,
-      imageURL: imageURL
+      image: imageURL
     };
     menu.push(newItem);
 
